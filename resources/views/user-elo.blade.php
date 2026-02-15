@@ -1,11 +1,10 @@
 <div>
-    <!-- No surplus words or unnecessary actions. - Marcus Aurelius -->
-    <h1>Users db</h1>
+    <h1>User data</h1>
     <table border="1">
         <tr>
-            <td>name</td>
-            <td>email</td>
-            <td>phoe</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Password</td>
         </tr>
         @foreach($users as $user)
         <tr>

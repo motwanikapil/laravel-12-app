@@ -5,6 +5,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HomeController2;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentController2;
+use App\Http\Controllers\UserController3;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\UserEloController;
+use App\Http\Controllers\UserRoutesController;
+use App\Http\Controllers\UserLoginController;
 use App\Http\Middleware\AgeCheck;
 // Route::get('/', function () {
 //     return view('welcome');
@@ -74,3 +80,50 @@ if condition pass request will reach to middleware
 
 Route::view('home5','home3')->middleware([AgeCheck::class, CountryCheck::class]);
 Route::view('about5','about2');
+
+// db connection and showing the mysql data
+Route::get('users-db', [UserController::class, 'getUsers']);
+
+// eloquent model in laravel - crud operations with db becomes easier with this model.
+// it is an orm
+// db related work is done mostly in model
+/*
+CREATE TABLE students (
+	id INT(30) auto_increment PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    batch VARCHAR(100)
+);
+*/
+
+
+// get data from sql database by creating Student model which will automatically connect to students table
+Route::get('students',[StudentController2::class,'getStudents']);
+
+// getting data using httpclient
+Route::get('get-users',[UserController3::class, 'getUsers']);
+
+// using query builder with database
+Route::get('user-queries',[UsersController::class, 'queries']);
+
+// using eloquent query builder
+Route::get('user-elo', [UserEloController::class, 'queries']);
+
+// route handler methods
+Route::get('user-route',[UserRoutesController::class, 'get']);
+Route::post('user-route', [UserRoutesController::class, 'post']);
+Route::put('user-route', [UserRoutesController::class, 'put']);
+Route::delete('user-route', [UserRoutesController::class, 'delete']);
+
+// any - for all the request methods same callback will be called.
+// Route::any('user-route',[UserRoutesController::class, 'any']);
+
+// Route::match(['get','post'],'/user',[UserController::class, 'group2'])
+// Route::match(['put','delete'],'/user',[UserController::class, 'group2'])
+
+Route::view('form','user-route');
+
+Route::view('login','login');
+Route::post('login',[UserLoginController::class, 'login']);
+Route::view('profile','profile');
+Route::get('logout',[UserLoginController::class, 'logout']);

@@ -67,6 +67,7 @@ class UserController extends Controller
     }
 
     function getUsers() {
-        return DB::select('select * from users');
+        $users = DB::select('select * from users');
+        return view('users-db', ['users'=>$users]);
     }
 }
