@@ -11,6 +11,8 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UserEloController;
 use App\Http\Controllers\UserRoutesController;
 use App\Http\Controllers\UserLoginController;
+use App\Http\Controllers\FlashSessionController;
+use App\Http\Controllers\UploadController;
 use App\Http\Middleware\AgeCheck;
 // Route::get('/', function () {
 //     return view('welcome');
@@ -127,3 +129,11 @@ Route::view('login','login');
 Route::post('login',[UserLoginController::class, 'login']);
 Route::view('profile','profile');
 Route::get('logout',[UserLoginController::class, 'logout']);
+
+// flash session for notifications
+Route::view('flash-session-form','flash-session');
+Route::post('flash-session',[FlashSessionController::class, 'addUser']);
+
+// upload file
+Route::view('upload','upload');
+Route::post('upload',[UploadController::class, 'upload']);
